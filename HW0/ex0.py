@@ -91,12 +91,15 @@ rock = 2
 lizard = 3
 spock = 4
 
-lRock = lambda first, second: "Draw" if first == second         else \
+lRock = lambda first, second: \
+        "Draw" if first == second         else \
         "Win" if (first == scissors     and second == paper)    or \
                  (first == rock         and second == scissors) or \
                  (first == paper        and second == rock)     else \
         "Lose"
-lSpock = lambda first, second: "Draw" if first == second else \
+        
+lSpock = lambda first, second: \
+            "Draw" if first == second else \
             "Win" if (first == scissors and (second == paper    or second == lizard))   or \
                      (first == rock     and (second == scissors or second == lizard))   or \
                      (first == paper    and (second == rock     or second == spock))    or \
