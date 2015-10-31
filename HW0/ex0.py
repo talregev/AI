@@ -58,18 +58,14 @@ def list_fib(n):
     return fibValues
 
 def num_words(st):
-    numbers = []
-    words = st.split()
-    for word in words:
-        numbers.append(len(word))
-    return numbers
+    return [len(word) for word in st.split()]
+
+lnum_words = lambda st: [len(word) for word in st.split()]
+lavg_num_words = lambda st: float(sum(lnum_words(st))) / len(lnum_words(st)) 
 
 def avg_num_words(st):
     numbers = num_words(st)
-    sum = 0
-    for number in numbers:
-        sum = sum + number
-    return float(sum) / len(numbers)
+    return float(sum(numbers)) / len(numbers)
 
 
 def enum(**enums):
@@ -90,7 +86,24 @@ def RockPaperScissors(first, second):
     switcher2 = switcher.get(first, "nothing")
     return switcher2[second]
 
-    
+scissors = 0
+paper = 1
+rock = 2
+lizard = 3
+spock = 4
+
+lRock = lambda first, second: "Draw" if first == second         else \
+        "Win" if (first == scissors     and second == paper)    or \
+                 (first == rock         and second == scissors) or \
+                 (first == paper        and second == rock)     else \
+        "Lose"
+lSpock = lambda first, second: "Draw" if first == second else \
+            "Win" if (first == scissors and (second == paper    or second == lizard))   or \
+                     (first == rock     and (second == scissors or second == lizard))   or \
+                     (first == paper    and (second == rock     or second == spock))    or \
+                     (first == lizard   and (second == spock    or second == paper))    or \
+                     (first == spock    and (second == scissors or second == rock))     else \
+            "Lose"
 
 def RockPaperScissorsLizardSpock(first, second):
     if (first < 0 or first > 4 or second < 0 or second > 4):
@@ -111,7 +124,7 @@ def random_brackets(n):
     numOpen     = 0
     numClose    = 0
     string      = ""
-    for i in range (0,n*2):
+    for _ in range (0,n*2):
         if (numOpen >= n):
             string      += "]"
             numClose    += 1
@@ -133,7 +146,7 @@ def random_balanced_brackets(n):
     brackets    = [] 
     string      = ""   
     num_opening = 0
-    for i in range (0,n*2):
+    for _ in range (0,n*2):
         if num_opening >= n:
             string += "]"
             brackets.remove("[")
@@ -185,7 +198,12 @@ if __name__ == "__main__":
     print "random_brackets",string2
     print is_balanced(string1)
     print is_balanced(string2)
-    print lfib(13)
+    print lfib(10)
     print lprime(100)
+    print lnum_words("Tal Regev is the best")
+    print lavg_num_words("Tal Regev is the best")
+    print lRock(Game.Paper,Game.Rock)
+    print lSpock(Game.Spock,Game.Rock)
+
 
 
