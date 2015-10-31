@@ -2,13 +2,24 @@ from random import randint
 
 
 lfib = lambda n: \
-                 [0] if n == 0 \
-                 else [0,1] if n == 1 \
-                 else lfib(n-1) + [lfib(n-2)[-2] + lfib(n-1)[-1]] \
-                 if len(lfib(n-2)) == len(lfib(n-1)) and (lfib(n-2)[-2] + lfib(n-1)[-1]) <= n \
-                 else lfib(n-1) if len(lfib(n-2)) == len(lfib(n-1)) and (lfib(n-2)[-2] + lfib(n-1)[-1]) > n \
-                 else lfib(n-1) + [lfib(n-2)[-1] + lfib(n-1)[-1]] \
-                 if (lfib(n-2)[-1] + lfib(n-1)[-1]) <= n else lfib(n-1)
+                 [0] if n == 0 else \
+                 [0,1] if n == 1 else \
+                 lfib(n-1) + [lfib(n-2)[-2] + lfib(n-1)[-1]] \
+                 if len(lfib(n-2)) == len(lfib(n-1)) and (lfib(n-2)[-2] + lfib(n-1)[-1]) <= n else\
+                 lfib(n-1) if len(lfib(n-2)) == len(lfib(n-1)) and (lfib(n-2)[-2] + lfib(n-1)[-1]) > n else \
+                 lfib(n-1) + [lfib(n-2)[-1] + lfib(n-1)[-1]] if (lfib(n-2)[-1] + lfib(n-1)[-1]) <= n else \
+                 lfib(n-1)
+
+isPrime = lambda n,x:  False if n < 2 else \
+                       True  if n == 2 else \
+                       False  if (x == 2 and n % x == 0) else \
+                       True if (x == 2 and n % x != 0) else \
+                       isPrime(n,x-1) if (x == n) else \
+                       n % x != 0 and isPrime(n,x-1) 
+
+lprime = lambda n: \
+            [] if n < 2 else \
+            lprime(n-1) + [n]  if isPrime(n,n) else lprime(n-1)
 
 
 def list_prime(n):
@@ -174,6 +185,7 @@ if __name__ == "__main__":
     print "random_brackets",string2
     print is_balanced(string1)
     print is_balanced(string2)
-    print lfib(13)
+    #print lfib(12)
+    print lprime(100)
 
 
