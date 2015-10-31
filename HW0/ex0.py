@@ -19,6 +19,31 @@ isPrime = lambda n,x:  False if n < 2 else \
 
 lprime = lambda n:  [] if n < 2 else \
                     lprime(n-1) + [n]  if isPrime(n,n) else lprime(n-1)
+                    
+lnum_words = lambda st: [len(word) for word in st.split()]
+lavg_num_words = lambda st: float(sum(lnum_words(st))) / len(lnum_words(st))                     
+                    
+scissors = 0
+paper = 1
+rock = 2
+lizard = 3
+spock = 4
+
+lRock = lambda first, second: \
+        "Draw" if  first == second       else \
+        "Win"  if (first == scissors     and second == paper)    or \
+                  (first == rock         and second == scissors) or \
+                  (first == paper        and second == rock)     else \
+        "Lose"
+        
+lSpock = lambda first, second: \
+            "Draw" if  first == second   else \
+            "Win"  if (first == scissors and (second == paper    or second == lizard))   or \
+                      (first == rock     and (second == scissors or second == lizard))   or \
+                      (first == paper    and (second == rock     or second == spock))    or \
+                      (first == lizard   and (second == spock    or second == paper))    or \
+                      (first == spock    and (second == scissors or second == rock))     else \
+            "Lose"                    
 
 
 def list_prime(n):
@@ -59,9 +84,6 @@ def list_fib(n):
 def num_words(st):
     return [len(word) for word in st.split()]
 
-lnum_words = lambda st: [len(word) for word in st.split()]
-lavg_num_words = lambda st: float(sum(lnum_words(st))) / len(lnum_words(st)) 
-
 def avg_num_words(st):
     numbers = num_words(st)
     return float(sum(numbers)) / len(numbers)
@@ -85,27 +107,6 @@ def RockPaperScissors(first, second):
     switcher2 = switcher.get(first, "nothing")
     return switcher2[second]
 
-scissors = 0
-paper = 1
-rock = 2
-lizard = 3
-spock = 4
-
-lRock = lambda first, second: \
-        "Draw" if first == second         else \
-        "Win" if (first == scissors     and second == paper)    or \
-                 (first == rock         and second == scissors) or \
-                 (first == paper        and second == rock)     else \
-        "Lose"
-        
-lSpock = lambda first, second: \
-            "Draw" if first == second else \
-            "Win" if (first == scissors and (second == paper    or second == lizard))   or \
-                     (first == rock     and (second == scissors or second == lizard))   or \
-                     (first == paper    and (second == rock     or second == spock))    or \
-                     (first == lizard   and (second == spock    or second == paper))    or \
-                     (first == spock    and (second == scissors or second == rock))     else \
-            "Lose"
 
 def RockPaperScissorsLizardSpock(first, second):
     if (first < 0 or first > 4 or second < 0 or second > 4):
