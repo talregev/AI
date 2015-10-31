@@ -185,7 +185,7 @@ if __name__ == "__main__":
     print "random_brackets",string2
     print is_balanced(string1)
     print is_balanced(string2)
-    #print lfib(12)
+    print lfib(13)
     print lprime(100)
 
 
