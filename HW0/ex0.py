@@ -4,6 +4,9 @@ from random import randint
 lfib = lambda n: \
                  [0] if n == 0 \
                  else [0,1] if n == 1 \
+                 else lfib(n-1) + [lfib(n-2)[-2] + lfib(n-1)[-1]] \
+                 if len(lfib(n-2)) == len(lfib(n-1)) and (lfib(n-2)[-2] + lfib(n-1)[-1]) <= n \
+                 else lfib(n-1) if len(lfib(n-2)) == len(lfib(n-1)) and (lfib(n-2)[-2] + lfib(n-1)[-1]) > n \
                  else lfib(n-1) + [lfib(n-2)[-1] + lfib(n-1)[-1]] \
                  if (lfib(n-2)[-1] + lfib(n-1)[-1]) <= n else lfib(n-1)
 
@@ -171,6 +174,6 @@ if __name__ == "__main__":
     print "random_brackets",string2
     print is_balanced(string1)
     print is_balanced(string2)
-    print lfib(10)
+    print lfib(13)
 
 
